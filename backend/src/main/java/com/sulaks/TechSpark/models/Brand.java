@@ -18,14 +18,14 @@ public class Brand {
     @Column(name = "brand_id")
     private Long brandId;
 
-    @Column(nullable = false, length = 120)
+    @Column(nullable = false, length = 120, unique = true)
     private String name;
 
     @Column(nullable = false, length = 140, unique = true)
     private String slug;
 
     @Column(name = "is_active",nullable = false)
-    private boolean isActive = true;
+    private boolean active = true;
 
     @CreationTimestamp
     @Column(name = "created_at",nullable = false)

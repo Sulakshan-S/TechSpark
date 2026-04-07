@@ -8,6 +8,7 @@ import com.sulaks.TechSpark.models.User;
 import com.sulaks.TechSpark.repository.UserRepo;
 import com.sulaks.TechSpark.security.JwtService;
 import com.sulaks.TechSpark.service.AuthService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepo userRepo;
@@ -22,18 +24,6 @@ public class AuthServiceImpl implements AuthService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final AuthMapper authMapper;
-
-    public AuthServiceImpl(UserRepo userRepo,
-                           PasswordEncoder passwordEncoder,
-                           JwtService jwtService,
-                           AuthenticationManager authenticationManager,
-                           AuthMapper authMapper) {
-        this.userRepo= userRepo;
-        this.passwordEncoder = passwordEncoder;
-        this.jwtService = jwtService;
-        this.authenticationManager = authenticationManager;
-        this.authMapper = authMapper;
-    }
 
     @Override
     public AuthResponse register(RegisterRequest request) {

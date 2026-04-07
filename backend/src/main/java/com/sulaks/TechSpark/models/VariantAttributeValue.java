@@ -16,7 +16,7 @@ public class VariantAttributeValue {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "product_variant_id")
-    private ProductVariant productvariant;
+    private ProductVariant productVariant;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "variant_attribute_id")
