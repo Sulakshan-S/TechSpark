@@ -59,6 +59,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/product-images/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/product-images/**").hasRole("ADMIN")
 
+                        .requestMatchers(HttpMethod.GET, "/api/product-spec-attributes/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/product-spec-attributes/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/product-spec-attributes/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/product-spec-attributes/**").hasRole("ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
