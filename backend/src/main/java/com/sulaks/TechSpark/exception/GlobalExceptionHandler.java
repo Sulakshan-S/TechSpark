@@ -106,7 +106,7 @@ public class GlobalExceptionHandler {
     ) {
         return buildErrorResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR,
-                "Something went wrong",
+                ex.getMessage(),
                 request.getRequestURI()
         );
     }

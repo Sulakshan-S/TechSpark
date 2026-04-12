@@ -80,6 +80,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/product-variants/**").hasRole("ADMIN")
 
                         .requestMatchers("/api/variant-inventories/**").hasRole("ADMIN")
+                        .requestMatchers("/api/stock-movements/**").hasRole("ADMIN")
 
                         .anyRequest().authenticated()
                 )
