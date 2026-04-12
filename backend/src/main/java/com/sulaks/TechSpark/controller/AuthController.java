@@ -33,6 +33,10 @@ public class AuthController {
 
     @GetMapping("/me")
     public ResponseEntity<UserResponse> getCurrentUser(Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new org.springframework.security.authentication.BadCredentialsException("User is not authenticated");
+        }
+
         return ResponseEntity.ok(authService.getCurrentUser(authentication.getName()));
     }
 }

@@ -1,6 +1,8 @@
 package com.sulaks.TechSpark.config;
 
+import com.sulaks.TechSpark.security.JwtAccessDeniedHandler;
 import com.sulaks.TechSpark.security.JwtAuthFilter;
+import com.sulaks.TechSpark.security.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +25,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -32,8 +36,13 @@ public class SecurityConfig {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                        .accessDeniedHandler(jwtAccessDeniedHandler)
+                )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
+                        .requestMatchers("/api/auth/me").authenticated()
 
                         .requestMatchers(HttpMethod.GET, "/api/brands/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/brands/**").hasRole("ADMIN")
@@ -71,6 +80,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/product-variants/**").hasRole("ADMIN")
 
                         .requestMatchers("/api/variant-inventories/**").hasRole("ADMIN")
+                        .requestMatchers("/api/stock-movements/**").hasRole("ADMIN")
 
                         .anyRequest().authenticated()
                 )
