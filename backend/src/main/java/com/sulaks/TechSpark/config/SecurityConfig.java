@@ -1,15 +1,11 @@
 package com.sulaks.TechSpark.config;
 
-import com.sulaks.TechSpark.security.JwtAccessDeniedHandler;
 import com.sulaks.TechSpark.security.JwtAuthFilter;
-import com.sulaks.TechSpark.security.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -69,6 +65,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/variant-attributes/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/variant-attributes/**").hasRole("ADMIN")
 
+                        .requestMatchers(HttpMethod.GET, "/api/product-variants/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/product-variants/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/product-variants/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/product-variants/**").hasRole("ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
@@ -86,6 +87,4 @@ public class SecurityConfig {
             throws Exception {
         return configuration.getAuthenticationManager();
     }
-
-
 }
