@@ -4,7 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "variant_attribute_values")
+@Table(name = "variant_attribute_values",
+        uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"product_variant_id", "variant_attribute_id"})
+        }
+)
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor @Builder
 public class VariantAttributeValue {
