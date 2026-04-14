@@ -7,7 +7,11 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "wishlist_items")
+@Table(name = "wishlist_items",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"user_id", "product_id"})
+        }
+)
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor @Builder
 public class WishlistItem {

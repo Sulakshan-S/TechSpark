@@ -74,6 +74,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/variant-attributes/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/variant-attributes/**").hasRole("ADMIN")
 
+                        .requestMatchers(HttpMethod.GET, "/api/variant-attribute-values/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/variant-attribute-values").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/variant-attribute-values/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/variant-attribute-values/**").hasRole("ADMIN")
+
                         .requestMatchers(HttpMethod.GET, "/api/product-variants/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/product-variants/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/product-variants/**").hasRole("ADMIN")
@@ -81,6 +86,8 @@ public class SecurityConfig {
 
                         .requestMatchers("/api/variant-inventories/**").hasRole("ADMIN")
                         .requestMatchers("/api/stock-movements/**").hasRole("ADMIN")
+
+                        .requestMatchers("/api/wishlist/**").authenticated()
 
                         .anyRequest().authenticated()
                 )
