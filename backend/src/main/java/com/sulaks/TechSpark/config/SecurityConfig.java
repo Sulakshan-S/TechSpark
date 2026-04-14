@@ -88,6 +88,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/stock-movements/**").hasRole("ADMIN")
 
                         .requestMatchers("/api/wishlist/**").authenticated()
+                        .requestMatchers("/api/cart/**").authenticated()
 
                         .anyRequest().authenticated()
                 )
