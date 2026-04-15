@@ -95,6 +95,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/coupons/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/coupons/**").hasRole("ADMIN")
 
+                        .requestMatchers("/api/addresses/**").authenticated()
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
