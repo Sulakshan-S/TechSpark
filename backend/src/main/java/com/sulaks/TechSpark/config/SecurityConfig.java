@@ -90,6 +90,11 @@ public class SecurityConfig {
                         .requestMatchers("/api/wishlist/**").authenticated()
                         .requestMatchers("/api/cart/**").authenticated()
 
+                        .requestMatchers(HttpMethod.GET, "/api/coupons/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/coupons/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/coupons/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/coupons/**").hasRole("ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
