@@ -1,6 +1,8 @@
 package com.sulaks.TechSpark.dto.order;
 
 import com.sulaks.TechSpark.enums.OrderStatus;
+import com.sulaks.TechSpark.enums.PaymentMethod;
+import com.sulaks.TechSpark.enums.PaymentStatus;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -32,6 +34,11 @@ public class OrderResponse {
     private BigDecimal discountTotal;
     private BigDecimal shippingFee;
     private BigDecimal grandTotal;
+
+    private Long paymentId;
+    private PaymentMethod paymentMethod;
+    private PaymentStatus paymentStatus;
+    private BigDecimal paymentAmount;
 
     private OrderStatus status;
 

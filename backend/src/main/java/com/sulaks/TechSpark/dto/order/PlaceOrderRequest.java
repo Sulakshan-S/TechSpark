@@ -1,11 +1,9 @@
 package com.sulaks.TechSpark.dto.order;
 
-import jakarta.validation.constraints.DecimalMin;
+import com.sulaks.TechSpark.enums.PaymentMethod;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -14,8 +12,8 @@ public class PlaceOrderRequest {
     @NotNull(message = "Shipping address id is required")
     private Long shippingAddressId;
 
-    private String couponCode;
+    @NotNull(message = "Payment method is required")
+    private PaymentMethod paymentMethod;
 
-    @DecimalMin(value = "0.0", inclusive = true, message = "Shipping fee must be zero or greater")
-    private BigDecimal shippingFee = BigDecimal.ZERO;
+    private String couponCode;
 }
