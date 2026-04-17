@@ -1,5 +1,5 @@
 package com.sulaks.TechSpark.enums;
 
 public enum PaymentStatus {
-    PENDING, SUCCESS, FAILED, REFUNDED;
+    PENDING, SUCCESS, CANCELLED, REFUNDED;
 }

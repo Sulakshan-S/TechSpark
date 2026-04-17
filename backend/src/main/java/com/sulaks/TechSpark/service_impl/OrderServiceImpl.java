@@ -64,9 +64,7 @@ public class OrderServiceImpl implements OrderService {
                 .map(item -> item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        BigDecimal shippingFee = request.getShippingFee() != null
-                ? request.getShippingFee()
-                : BigDecimal.ZERO;
+        BigDecimal shippingFee = BigDecimal.valueOf(350);
 
         BigDecimal discountTotal = BigDecimal.ZERO;
         Coupon appliedCoupon = null;
