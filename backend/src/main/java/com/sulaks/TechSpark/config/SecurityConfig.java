@@ -121,6 +121,16 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/shipments/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/shipments/*/events").hasRole("ADMIN")
 
+                        .requestMatchers(HttpMethod.GET, "/api/reviews/product/**").permitAll()
+
+                        .requestMatchers(HttpMethod.POST, "/api/reviews").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/reviews/my").authenticated()
+
+                        .requestMatchers(HttpMethod.GET, "/api/reviews").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/reviews/pending").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/reviews/*/approve").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/reviews/*").hasRole("ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
