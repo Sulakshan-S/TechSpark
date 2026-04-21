@@ -6,6 +6,7 @@ import com.sulaks.TechSpark.dto.order.OrderResponse;
 import com.sulaks.TechSpark.models.Order;
 import com.sulaks.TechSpark.models.OrderCoupon;
 import com.sulaks.TechSpark.models.OrderItem;
+import com.sulaks.TechSpark.models.Payment;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -39,7 +40,8 @@ public class OrderMapper {
     public OrderResponse toOrderResponse(
             Order order,
             List<OrderItem> orderItems,
-            List<OrderCoupon> orderCoupons
+            List<OrderCoupon> orderCoupons,
+            Payment payment
     ) {
         return OrderResponse.builder()
                 .orderId(order.getOrderId())
@@ -63,6 +65,11 @@ public class OrderMapper {
                 .shippingFee(order.getShippingFee())
                 .grandTotal(order.getGrandTotal())
                 .status(order.getStatus())
+
+                .paymentId(payment != null ? payment.getPaymentId() : null)
+                .paymentMethod(payment != null ? payment.getMethod() : null)
+                .paymentStatus(payment != null ? payment.getStatus() : null)
+                .paymentAmount(payment != null ? payment.getAmount() : null)
 
                 .items(orderItems.stream().map(this::toOrderItemResponse).toList())
                 .coupons(orderCoupons.stream().map(this::toOrderCouponResponse).toList())
