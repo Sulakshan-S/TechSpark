@@ -3,14 +3,16 @@ package com.sulaks.TechSpark.service_impl;
 import com.sulaks.TechSpark.dto.order.OrderResponse;
 import com.sulaks.TechSpark.dto.order.PlaceOrderRequest;
 import com.sulaks.TechSpark.dto.order.UpdateOrderStatusRequest;
+import com.sulaks.TechSpark.enums.CartStatus;
 import com.sulaks.TechSpark.enums.DiscountType;
 import com.sulaks.TechSpark.enums.OrderStatus;
-import com.sulaks.TechSpark.enums.CartStatus;
+import com.sulaks.TechSpark.enums.PaymentStatus;
 import com.sulaks.TechSpark.exception.ResourceNotFoundException;
 import com.sulaks.TechSpark.mapper.OrderMapper;
 import com.sulaks.TechSpark.models.*;
 import com.sulaks.TechSpark.repository.*;
 import com.sulaks.TechSpark.service.OrderService;
+import com.sulaks.TechSpark.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,8 @@ public class OrderServiceImpl implements OrderService {
     private final OrderItemRepo orderItemRepo;
     private final OrderCouponRepo orderCouponRepo;
     private final OrderStatusHistoryRepo orderStatusHistoryRepo;
+    private final PaymentRepo paymentRepo;
+    private final PaymentEventRepo paymentEventRepo;
     private final UserRepo userRepo;
     private final AddressRepo addressRepo;
     private final CartRepo cartRepo;
@@ -36,6 +40,7 @@ public class OrderServiceImpl implements OrderService {
     private final CouponRepo couponRepo;
     private final VariantInventoryRepo variantInventoryRepo;
     private final OrderMapper orderMapper;
+    private final PaymentService paymentService;
 
     @Override
     public OrderResponse placeOrder(PlaceOrderRequest request, String userEmail) {
@@ -137,11 +142,16 @@ public class OrderServiceImpl implements OrderService {
 
         orderStatusHistoryRepo.save(history);
 
+        Payment savedPayment = paymentService.createPaymentForOrder(
+                savedOrder,
+                request.getPaymentMethod()
+        );
+
         cartItemRepo.deleteAll(cartItems);
 
         List<OrderCoupon> savedCoupons = orderCouponRepo.findByOrder_OrderId(savedOrder.getOrderId());
 
-        return orderMapper.toOrderResponse(savedOrder, savedOrderItems, savedCoupons);
+        return orderMapper.toOrderResponse(savedOrder, savedOrderItems, savedCoupons, savedPayment);
     }
 
     @Override
@@ -183,10 +193,18 @@ public class OrderServiceImpl implements OrderService {
             throw new IllegalArgumentException("This order cannot be cancelled now");
         }
 
+        Payment payment = paymentRepo.findByOrder_OrderId(order.getOrderId()).orElse(null);
+
+        if (payment != null && payment.getStatus() == PaymentStatus.PAID) {
+            throw new IllegalArgumentException("Paid orders cannot be cancelled directly. Use refund flow.");
+        }
+
         restoreStock(order);
 
         order.setStatus(OrderStatus.CANCELLED);
         Order updatedOrder = orderRepo.save(order);
+
+        cancelPendingPaymentForOrder(updatedOrder, "Payment cancelled because order was cancelled by user");
 
         OrderStatusHistory history = OrderStatusHistory.builder()
                 .order(updatedOrder)
@@ -239,11 +257,21 @@ public class OrderServiceImpl implements OrderService {
         }
 
         if (newStatus == OrderStatus.CANCELLED) {
+            Payment payment = paymentRepo.findByOrder_OrderId(order.getOrderId()).orElse(null);
+
+            if (payment != null && payment.getStatus() == PaymentStatus.PAID) {
+                throw new IllegalArgumentException("Paid orders cannot be cancelled directly. Use refund flow.");
+            }
+
             restoreStock(order);
         }
 
         order.setStatus(newStatus);
         Order updatedOrder = orderRepo.save(order);
+
+        if (newStatus == OrderStatus.CANCELLED) {
+            cancelPendingPaymentForOrder(updatedOrder, "Payment cancelled because order was cancelled by admin");
+        }
 
         OrderStatusHistory history = OrderStatusHistory.builder()
                 .order(updatedOrder)
@@ -260,11 +288,34 @@ public class OrderServiceImpl implements OrderService {
         return buildOrderResponse(updatedOrder);
     }
 
+    private void cancelPendingPaymentForOrder(Order order, String message) {
+        Payment payment = paymentRepo.findByOrder_OrderId(order.getOrderId()).orElse(null);
+
+        if (payment == null) {
+            return;
+        }
+
+        if (payment.getStatus() == PaymentStatus.PENDING) {
+            payment.setStatus(PaymentStatus.CANCELLED);
+            paymentRepo.save(payment);
+
+            PaymentEvent event = PaymentEvent.builder()
+                    .payment(payment)
+                    .eventType("PAYMENT_CANCELLED")
+                    .message(message)
+                    .eventTime(LocalDateTime.now())
+                    .build();
+
+            paymentEventRepo.save(event);
+        }
+    }
+
     private OrderResponse buildOrderResponse(Order order) {
         List<OrderItem> orderItems = orderItemRepo.findByOrder_OrderId(order.getOrderId());
         List<OrderCoupon> orderCoupons = orderCouponRepo.findByOrder_OrderId(order.getOrderId());
+        Payment payment = paymentRepo.findByOrder_OrderId(order.getOrderId()).orElse(null);
 
-        return orderMapper.toOrderResponse(order, orderItems, orderCoupons);
+        return orderMapper.toOrderResponse(order, orderItems, orderCoupons, payment);
     }
 
     private User getUserByEmail(String email) {

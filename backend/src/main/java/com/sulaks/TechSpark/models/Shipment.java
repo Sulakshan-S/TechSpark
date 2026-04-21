@@ -17,7 +17,7 @@ public class Shipment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "shipment_id")
-    private Long shipment_id;
+    private Long shipmentId;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "order_id")
