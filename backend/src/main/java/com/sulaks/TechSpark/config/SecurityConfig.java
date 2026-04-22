@@ -131,6 +131,25 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PATCH, "/api/reviews/*/approve").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/reviews/*").hasRole("ADMIN")
 
+                        .requestMatchers(HttpMethod.POST, "/api/returns").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/returns/my").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/returns/my/**").authenticated()
+
+                        .requestMatchers(HttpMethod.GET, "/api/returns").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/returns/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/returns/*/approve").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/returns/*/reject").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/returns/*/picked-up").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/returns/*/received").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/returns/*/close").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/api/refunds/my/**").authenticated()
+
+                        .requestMatchers(HttpMethod.POST, "/api/refunds/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/refunds").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/refunds/return/*").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/refunds/*").hasRole("ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

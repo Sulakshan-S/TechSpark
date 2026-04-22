@@ -1,5 +1,5 @@
 package com.sulaks.TechSpark.enums;
 
 public enum UserStatus {
-    ACTIVE,BLOCKED;
+    ACTIVE,BLOCKED,PENDING_VERIFICATION;
 }
