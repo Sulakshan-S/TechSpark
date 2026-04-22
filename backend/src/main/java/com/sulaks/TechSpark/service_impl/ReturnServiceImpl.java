@@ -223,8 +223,8 @@ public class ReturnServiceImpl implements ReturnService {
 
         ReturnRequest returnRequest = getReturnRequest(returnId);
 
-        if (returnRequest.getStatus() != ReturnStatus.RECEIVED) {
-            throw new IllegalArgumentException("Only RECEIVED return requests can be CLOSED for now");
+        if (returnRequest.getStatus() != ReturnStatus.REFUNDED) {
+            throw new IllegalArgumentException("Only REFUNDED return requests can be CLOSED");
         }
 
         returnRequest.setStatus(ReturnStatus.CLOSED);
