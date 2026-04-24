@@ -19,7 +19,8 @@ public class AuthMapper {
                 .passwordHash(passwordEncoder.encode(request.getPassword()))
                 .phone(request.getPhone())
                 .role(UserRole.CUSTOMER)
-                .status(UserStatus.ACTIVE)
+                .status(UserStatus.PENDING_VERIFICATION)
+                .emailVerified(false)
                 .build();
     }
 

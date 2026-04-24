@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
+import com.sulaks.TechSpark.enums.UserStatus;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPasswordHash(),
-                user.getStatus().name().equals("ACTIVE"),
+                user.getStatus() == UserStatus.ACTIVE,
                 true,
                 true,
                 true,
