@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import lombok.Builder.Default;
 
 import java.time.LocalDateTime;
 
@@ -33,12 +34,18 @@ public class User {
     private String phone;
 
     @Enumerated(EnumType.STRING)
+    @Default
     @Column(nullable = false)
     private UserRole role = UserRole.CUSTOMER;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private UserStatus status = UserStatus.ACTIVE;
+    @Default
+    private UserStatus status = UserStatus.PENDING_VERIFICATION;
+
+    @Column(name = "email_verified", nullable = false)
+    @Default
+    private Boolean emailVerified = false;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)

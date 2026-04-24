@@ -1,12 +1,12 @@
 package com.sulaks.TechSpark.service;
 
-import com.sulaks.TechSpark.dto.auth.AuthResponse;
-import com.sulaks.TechSpark.dto.auth.LoginRequest;
-import com.sulaks.TechSpark.dto.auth.RegisterRequest;
-import com.sulaks.TechSpark.dto.auth.UserResponse;
+import com.sulaks.TechSpark.dto.auth.*;
+
 
 public interface AuthService {
-    AuthResponse register(RegisterRequest request);
+    MessageResponse register(RegisterRequest request);
     AuthResponse login(LoginRequest request);
     UserResponse getCurrentUser(String email);
+    MessageResponse verifyOtp(VerifyOtpRequest request);
+    MessageResponse resendOtp(ResendOtpRequest request);
 }
