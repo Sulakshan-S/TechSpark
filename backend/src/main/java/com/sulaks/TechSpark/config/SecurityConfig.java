@@ -152,6 +152,15 @@ public class SecurityConfig {
 
                         .requestMatchers("/api/user-activity-logs/**").hasRole("ADMIN")
 
+                        .requestMatchers(HttpMethod.GET, "/api/notifications/my").authenticated()
+
+                        .requestMatchers(HttpMethod.POST, "/api/notifications/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/notifications").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/notifications/target-role/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/notifications/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/notifications/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/notifications/**").hasRole("ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
