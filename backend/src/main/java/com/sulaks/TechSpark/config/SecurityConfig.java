@@ -150,6 +150,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/refunds/return/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/refunds/*").hasRole("ADMIN")
 
+                        .requestMatchers("/api/user-activity-logs/**").hasRole("ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
