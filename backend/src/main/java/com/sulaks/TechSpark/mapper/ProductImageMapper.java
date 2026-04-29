@@ -1,7 +1,7 @@
 package com.sulaks.TechSpark.mapper;
 
-import com.sulaks.TechSpark.dto.productimage.ProductImageRequest;
-import com.sulaks.TechSpark.dto.productimage.ProductImageResponse;
+import com.sulaks.TechSpark.dto.product_img.ProductImageRequest;
+import com.sulaks.TechSpark.dto.product_img.ProductImageResponse;
 import com.sulaks.TechSpark.models.Product;
 import com.sulaks.TechSpark.models.ProductImage;
 import org.springframework.stereotype.Component;

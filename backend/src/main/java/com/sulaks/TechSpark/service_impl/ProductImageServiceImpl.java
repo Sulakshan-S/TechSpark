@@ -1,7 +1,7 @@
 package com.sulaks.TechSpark.service_impl;
 
-import com.sulaks.TechSpark.dto.productimage.ProductImageRequest;
-import com.sulaks.TechSpark.dto.productimage.ProductImageResponse;
+import com.sulaks.TechSpark.dto.product_img.ProductImageRequest;
+import com.sulaks.TechSpark.dto.product_img.ProductImageResponse;
 import com.sulaks.TechSpark.exception.ResourceAlreadyExistsException;
 import com.sulaks.TechSpark.exception.ResourceNotFoundException;
 import com.sulaks.TechSpark.mapper.ProductImageMapper;

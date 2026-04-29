@@ -1,7 +1,7 @@
 package com.sulaks.TechSpark.controller;
 
-import com.sulaks.TechSpark.dto.productimage.ProductImageRequest;
-import com.sulaks.TechSpark.dto.productimage.ProductImageResponse;
+import com.sulaks.TechSpark.dto.product_img.ProductImageRequest;
+import com.sulaks.TechSpark.dto.product_img.ProductImageResponse;
 import com.sulaks.TechSpark.service.ProductImageService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

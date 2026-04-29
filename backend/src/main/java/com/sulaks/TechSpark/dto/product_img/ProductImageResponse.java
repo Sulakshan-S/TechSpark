@@ -1,4 +1,4 @@
-package com.sulaks.TechSpark.dto.productimage;
+package com.sulaks.TechSpark.dto.product_img;
 
 import lombok.Builder;
 import lombok.Getter;
