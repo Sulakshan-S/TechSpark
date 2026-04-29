@@ -1,4 +1,4 @@
-package com.sulaks.TechSpark.dto.productimage;
+package com.sulaks.TechSpark.dto.product_img;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
