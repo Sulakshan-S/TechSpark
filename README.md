@@ -1,10 +1,10 @@
 # TechSpark – Full Stack E-Commerce Platform
 
-TechSpark is a full-stack e-commerce web application built using React, Vite, Tailwind CSS, Spring Boot, Spring Security, JWT Authentication, and MySQL.
+TechSpark is a full-stack e-commerce web application built using React + Vite for the frontend and Spring Boot for the backend. The system includes authentication, cart management, orders, product management, payments, shipment tracking, refunds, wishlist functionality, and admin management features.
 
 ---
 
-# 🚀 Technologies Used
+# 📦 Technologies Used
 
 ## Frontend
 - React
@@ -25,69 +25,192 @@ TechSpark is a full-stack e-commerce web application built using React, Vite, Ta
 
 ---
 
-# 📁 Project Structure
+# 📁 Full Project Structure
 
 ```bash
 TechSpark/
 │
 ├── backend/
-│   ├── src/
+│   │
+│   ├── .gitattributes
+│   ├── .gitignore
+│   │
+│   ├── .idea/
+│   │   ├── compiler.xml
+│   │   ├── encodings.xml
+│   │   ├── jarRepositories.xml
+│   │   ├── misc.xml
+│   │   └── workspace.xml
+│   │
+│   ├── .mvn/
+│   │   └── wrapper/
+│   │       └── maven-wrapper.properties
+│   │
+│   ├── HELP.md
+│   ├── mvnw
+│   ├── mvnw.cmd
 │   ├── pom.xml
-│   └── application.properties
+│   │
+│   ├── src/
+│   │   │
+│   │   ├── main/
+│   │   │   │
+│   │   │   ├── java/
+│   │   │   │   │
+│   │   │   │   └── com/
+│   │   │   │       └── sulaks/
+│   │   │   │           └── TechSpark/
+│   │   │   │               │
+│   │   │   │               ├── config/
+│   │   │   │               │   └── SecurityConfig.java
+│   │   │   │               │
+│   │   │   │               ├── controller/
+│   │   │   │               │   ├── AddressController.java
+│   │   │   │               │   ├── AuthController.java
+│   │   │   │               │   ├── BrandController.java
+│   │   │   │               │   ├── CartController.java
+│   │   │   │               │   ├── CategoryController.java
+│   │   │   │               │   ├── CouponController.java
+│   │   │   │               │   ├── NotificationController.java
+│   │   │   │               │   ├── OrderController.java
+│   │   │   │               │   ├── PaymentController.java
+│   │   │   │               │   ├── ProductController.java
+│   │   │   │               │   ├── ProductImageController.java
+│   │   │   │               │   ├── ProductSpecAttributeController.java
+│   │   │   │               │   ├── ProductVariantController.java
+│   │   │   │               │   ├── RefundController.java
+│   │   │   │               │   ├── ReturnController.java
+│   │   │   │               │   ├── ReviewController.java
+│   │   │   │               │   ├── ShipmentController.java
+│   │   │   │               │   ├── StockMovementController.java
+│   │   │   │               │   ├── UserActivityLogController.java
+│   │   │   │               │   ├── VariantAttributeController.java
+│   │   │   │               │   ├── VariantAttributeValueController.java
+│   │   │   │               │   ├── VariantInventoryController.java
+│   │   │   │               │   └── WishlistController.java
+│   │   │   │               │
+│   │   │   │               ├── dto/
+│   │   │   │               │   ├── address/
+│   │   │   │               │   ├── auth/
+│   │   │   │               │   ├── brand/
+│   │   │   │               │   ├── cart/
+│   │   │   │               │   ├── category/
+│   │   │   │               │   ├── coupon/
+│   │   │   │               │   ├── notification/
+│   │   │   │               │   ├── order/
+│   │   │   │               │   ├── payment/
+│   │   │   │               │   ├── product/
+│   │   │   │               │   ├── product_img/
+│   │   │   │               │   ├── product_spec_attribute/
+│   │   │   │               │   ├── product_variant/
+│   │   │   │               │   ├── refund/
+│   │   │   │               │   ├── return_request/
+│   │   │   │               │   ├── review/
+│   │   │   │               │   ├── shipment/
+│   │   │   │               │   ├── stock_movement/
+│   │   │   │               │   ├── user_activity_log/
+│   │   │   │               │   ├── variant_attribute/
+│   │   │   │               │   ├── variant_attribute_value/
+│   │   │   │               │   ├── variant_inventory/
+│   │   │   │               │   └── wishlist/
+│   │   │   │               │
+│   │   │   │               ├── enums/
+│   │   │   │               ├── exception/
+│   │   │   │               ├── mapper/
+│   │   │   │               ├── models/
+│   │   │   │               ├── repository/
+│   │   │   │               ├── security/
+│   │   │   │               ├── service/
+│   │   │   │               ├── service_impl/
+│   │   │   │               ├── util/
+│   │   │   │               │
+│   │   │   │               └── TechSparkApplication.java
+│   │   │   │
+│   │   │   └── resources/
+│   │   │       ├── application.properties
+│   │   │       ├── static/
+│   │   │       └── templates/
+│   │   │
+│   │   └── test/
+│   │       └── java/
+│   │
+│   └── target/
+│
 │
 └── frontend/
-    ├── src/
-    ├── package.json
-    └── vite.config.js
-```
-
----
-
-# ✨ Features
-
-## Customer Features
-- User Registration
-- User Login
-- JWT Authentication
-- Product Browsing
-- Product Filtering
-- Product Search
-- Product Details
-- Shopping Cart
-- Wishlist
-- Checkout System
-- Order History
-- Address Management
-- Profile Management
-
-## Admin Features
-- Admin Dashboard
-- Product Management
-- Order Management
-- User Management
-- Protected Admin Routes
-
----
-
-# 🖥️ Frontend Folder Structure
-
-```bash
-src/
-├── assets/
-├── components/
-│   ├── common/
-│   ├── customer/
-│   └── admin/
-├── contexts/
-├── layouts/
-├── pages/
-│   ├── admin/
-│   ├── auth/
-│   ├── public/
-│   └── user/
+    │
+    ├── assets/
+    │   ├── hero.png
+    │   ├── react.svg
+    │   └── vite.svg
+    │
+    ├── components/
+    │   ├── common/
+    │   │   ├── DataTable.jsx
+    │   │   ├── EmptyState.jsx
+    │   │   ├── Footer.jsx
+    │   │   ├── LoadingState.jsx
+    │   │   ├── Modal.jsx
+    │   │   ├── Navbar.jsx
+    │   │   └── SectionTitle.jsx
+    │   │
+    │   └── shop/
+    │       ├── ProductCard.jsx
+    │       └── ProductFilters.jsx
+    │
+    ├── config/
+    │   ├── adminResources.js
+    │   └── env.js
+    │
+    ├── contexts/
+    │   ├── AuthContext.jsx
+    │   └── CartContext.jsx
+    │
+    ├── layouts/
+    │   ├── AdminLayout.jsx
+    │   └── PublicLayout.jsx
+    │
+    ├── lib/
+    │   ├── toast.js
+    │   └── utils.js
+    │
+    ├── pages/
+    │   ├── admin/
+    │   │   ├── AdminOrdersPage.jsx
+    │   │   ├── AdminResourcePage.jsx
+    │   │   └── DashboardPage.jsx
+    │   │
+    │   ├── auth/
+    │   │   ├── LoginPage.jsx
+    │   │   └── RegisterPage.jsx
+    │   │
+    │   ├── public/
+    │   │   ├── HomePage.jsx
+    │   │   ├── ProductDetailPage.jsx
+    │   │   └── ShopPage.jsx
+    │   │
+    │   ├── shared/
+    │   │   └── NotFoundPage.jsx
+    │   │
+    │   └── user/
+    │       ├── AddressesPage.jsx
+    │       ├── CartPage.jsx
+    │       ├── CheckoutPage.jsx
+    │       ├── OrdersPage.jsx
+    │       ├── ProfilePage.jsx
+    │       └── WishlistPage.jsx
+│
 ├── routes/
+│   ├── RequireAdmin.jsx
+│   └── RequireAuth.jsx
+│
 ├── services/
-├── config/
+│   ├── adminService.js
+│   ├── api.js
+│   ├── authService.js
+│   ├── storeService.js
+│   └── userService.js
+│
 ├── App.jsx
 ├── main.jsx
 └── index.css
@@ -95,38 +218,52 @@ src/
 
 ---
 
-# ⚙️ Backend Folder Structure
+# ✨ Main Features
 
-```bash
-src/main/java/com/techspark/
-├── controller/
-├── service/
-├── repository/
-├── entity/
-├── dto/
-├── security/
-├── config/
-└── TechSparkApplication.java
-```
-
----
-
-# 📌 Prerequisites
-
-Install the following before running the project:
-
-- Java 21
-- Node.js
-- Maven
-- MySQL
-- Git
-- VS Code / IntelliJ IDEA
+## 👤 Customer Features
+- User Registration
+- Login & Authentication
+- OTP Verification
+- Product Browsing
+- Product Variants
+- Shopping Cart
+- Wishlist
+- Checkout System
+- Order Tracking
+- Address Management
+- Product Reviews
+- Return Requests
+- Refund Requests
 
 ---
 
-# 🛠️ Backend Setup
+## 🛠️ Admin Features
+- Product Management
+- Category Management
+- Brand Management
+- Order Management
+- Shipment Management
+- Stock Management
+- Coupon Management
+- Notification Management
+- User Activity Logs
+- Refund Handling
 
-## 1. Navigate to Backend Folder
+---
+
+# 🔐 Security Features
+
+- JWT Authentication
+- Spring Security
+- Role-Based Authorization
+- Protected Routes
+- Secure REST APIs
+
+---
+
+# ⚙️ Backend Setup
+
+## 1. Navigate to Backend
 
 ```bash
 cd backend
@@ -134,7 +271,9 @@ cd backend
 
 ---
 
-## 2. Create MySQL Database
+## 2. Configure Database
+
+Create database:
 
 ```sql
 CREATE DATABASE techspark;
@@ -144,13 +283,13 @@ CREATE DATABASE techspark;
 
 ## 3. Configure application.properties
 
-Open:
+Location:
 
 ```bash
 src/main/resources/application.properties
 ```
 
-Update with your MySQL credentials:
+Example:
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/techspark
@@ -165,29 +304,13 @@ server.port=8080
 
 ---
 
-## 4. Run Backend Server
-
-Using Maven:
+## 4. Run Backend
 
 ```bash
 mvn spring-boot:run
 ```
 
-Or using Maven Wrapper:
-
-### Windows
-
-```bash
-./mvnw spring-boot:run
-```
-
-### Linux / Mac
-
-```bash
-./mvnw spring-boot:run
-```
-
-Backend will start on:
+Backend runs on:
 
 ```bash
 http://localhost:8080
@@ -197,7 +320,7 @@ http://localhost:8080
 
 # 🎨 Frontend Setup
 
-## 1. Navigate to Frontend Folder
+## 1. Navigate to Frontend
 
 ```bash
 cd frontend
@@ -213,13 +336,13 @@ npm install
 
 ---
 
-## 3. Run Frontend Development Server
+## 3. Run Frontend
 
 ```bash
 npm run dev
 ```
 
-Frontend will start on:
+Frontend runs on:
 
 ```bash
 http://localhost:5173
@@ -229,13 +352,13 @@ http://localhost:5173
 
 # 🌐 API Configuration
 
-Inside:
+File:
 
 ```bash
-src/config/env.js
+config/env.js
 ```
 
-Add:
+Example:
 
 ```javascript
 export const API_BASE_URL = "http://localhost:8080/api";
@@ -243,142 +366,38 @@ export const API_BASE_URL = "http://localhost:8080/api";
 
 ---
 
-# 🔐 Authentication Flow
-
-1. User logs in
-2. Backend validates credentials
-3. JWT token generated
-4. Token stored in frontend
-5. Protected routes verify token
-6. Authorized API requests include JWT token
-
----
-
-# 📄 Available Pages
-
-## Public Pages
-- Home
-- Shop
-- Product Details
-- Login
-- Register
-
-## User Pages
-- Cart
-- Wishlist
-- Checkout
-- Orders
-- Profile
-- Addresses
-
-## Admin Pages
-- Dashboard
-- Manage Products
-- Manage Orders
-- Manage Users
-
----
-
-# 🔌 API Services
-
-Located in:
-
-```bash
-src/services/
-```
-
-Services include:
-
-```bash
-authService.js
-adminService.js
-userService.js
-storeService.js
-api.js
-```
-
----
-
-# 🔒 Security Features
-
-- JWT Authentication
-- Protected Routes
-- Role-Based Access
-- Secure REST APIs
-- Spring Security Configuration
-
----
-
-# ▶️ Running Full Project
-
-## Step 1 – Start Backend
-
-```bash
-cd backend
-mvn spring-boot:run
-```
-
----
-
-## Step 2 – Start Frontend
-
-Open another terminal:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
----
-
-# 🐞 Common Errors & Fixes
+# 🐞 Common Errors
 
 ## Axios Network Error
 
 Possible reasons:
-
 - Backend not running
 - Wrong API URL
 - CORS issue
-- Firewall blocking requests
-
----
-
-## CORS Error
-
-Ensure backend CORS configuration allows frontend URL.
-
-Example:
-
-```java
-@CrossOrigin(origins = "http://localhost:5173")
-```
+- Incorrect port
 
 ---
 
 ## MySQL Connection Error
 
 Check:
-
 - MySQL service running
 - Database exists
-- Correct username/password
+- Correct credentials
 
 ---
 
-## npm install Errors
+## Tailwind Error
 
-Try:
+Install Tailwind dependencies:
 
 ```bash
-npm cache clean --force
-npm install
+npm install -D tailwindcss postcss autoprefixer
 ```
 
 ---
 
-# 🏗️ Production Build
+# 🚀 Build Project
 
 ## Frontend Build
 
@@ -394,93 +413,34 @@ npm run build
 mvn clean install
 ```
 
-Generated JAR:
+Run jar:
 
 ```bash
-target/TechSpark-0.0.1-SNAPSHOT.jar
-```
-
-Run:
-
-```bash
-java -jar target/TechSpark-0.0.1-SNAPSHOT.jar
+java -jar target/*.jar
 ```
 
 ---
 
 # ☁️ Deployment
 
-## Frontend Deployment
+## Frontend
 - Vercel
 - Netlify
-- GitHub Pages
 
-## Backend Deployment
+## Backend
 - Railway
 - Render
 - AWS
 - DigitalOcean
 
-## Database Hosting
-- MySQL Server
-- Railway MySQL
-- PlanetScale
-
----
-
-# 🔮 Future Improvements
-
-- Payment Gateway
-- Product Reviews
-- Image Uploads
-- Email Notifications
-- Inventory Management
-- Analytics Dashboard
-- Responsive Improvements
-
----
-
-# 🧾 Git Commands
-
-## Clone Repository
-
-```bash
-git clone <repository-url>
-```
-
----
-
-## Create Branch
-
-```bash
-git checkout -b feature-name
-```
-
----
-
-## Commit Changes
-
-```bash
-git add .
-git commit -m "Added new feature"
-```
-
----
-
-## Push Changes
-
-```bash
-git push origin main
-```
-
 ---
 
 # 👨‍💻 Author
 
-Developed by TechSpark Team.
+Developed for the TechSpark project.
 
 ---
 
 # 📜 License
 
-This project is developed for educational and development purposes.
+This project is developed for educational and learning purposes.
